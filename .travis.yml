@@ -1,11 +1,24 @@
 sudo: false
+
+addons:
+  apt:
+    packages:
+    - texlive-fonts-recommended
+    - texlive-latex-extra
+    - texlive-fonts-extra
+    - dvipng
+    - texlive-latex-recommended
+
+cache:
+  apt: true
+
 before_install:
-- sudo apt-get update && sudo apt-get install --no-install-recommends texlive-fonts-recommended
-  texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 - tlmgr update --self
 - tlmgr install layaureo supertabular titlesec longtable booktabs
+
 script:
 - xelatex Ufuk-Kayserilioglu-Resume.pdf
+
 deploy:
   provider: releases
   api_key:
