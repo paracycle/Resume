@@ -10,6 +10,7 @@ addons:
     - dvipng
     - texlive-latex-recommended
     - lmodern
+    - latex-xcolor
 
 cache:
   apt: true
