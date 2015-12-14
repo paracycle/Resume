@@ -6,6 +6,7 @@ addons:
     - texlive-fonts-recommended
     - texlive-latex-extra
     - texlive-fonts-extra
+    - texlive-xetex
     - dvipng
     - texlive-latex-recommended
 
