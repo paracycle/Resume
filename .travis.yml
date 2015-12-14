@@ -1,0 +1,15 @@
+sudo: false
+before_install:
+- sudo apt-get update && sudo apt-get install --no-install-recommends texlive-fonts-recommended
+  texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+- tlmgr update --self
+- tlmgr install layaureo supertabular titlesec longtable booktabs
+script:
+- xelatex Ufuk-Kayserilioglu-Resume.pdf
+deploy:
+  provider: releases
+  api_key:
+    secure: PK8yUSeOBx/PDiFWdSkSqZmtgl2X8omlmH5NxF8K60hYdHKwDR4onb3F2ErIAC28bjWHk/eL/C6P1aeyP3xiBOycvEV38dWd4od1BeAbbXubB4MiKc9kOFxB3E8alCmGNhVB1rPxUZuzPWX4zWlWtZkfFtAk86xNixp2SyAsnVPZ2FBIfgcvyDVrxbU9gcQnN2NahUxBRqF10EUVWg18B5cn4FxovlIeiTiWmwicvFIzyty+G1rGgcL/zxMOnFpZcZQVNdoqhPZJu4dvEjQcz/NgYtleEVXEBdBWbNnnLtWBq6l4ZlgqfNWr3MpSIGI7PD1QLXEib6pO/3p3A7hQ5lNzzUU+rKCxAJiibLRBCKjYyevAhhUBJZVik44f+eA1WyDB0QgFBAY2QtlYxq/v3m4pro/uOb8yx10vrEvJHTs0e/g7TBvJsWeCFNfcqY20CDKyt4RFUQ82b3z/XIcP7rF1mcmfqFyRz4FtVkqJag5NTiRfhJiZm9EKnpfbTgjttafj7Y6nW1PKQN1aip00ahSJRS7oNm/Irz0h6DayAoAUgEPHfwt1t5T/UzWacHjPs0Cj291PxrP+tL5xeuDopqZw7WRPkWnd5L4uuq7MYq2sIsbLOUREEjMmrGEcOrz6xl/PClwozHUsqoGoM0jpom2ulkiUF1FWluOPKP8XNqg=
+  file: Ufuk-Kayserilioglu-Resume.pdf
+  on:
+    repo: paracycle/Resume
