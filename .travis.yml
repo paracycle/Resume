@@ -12,10 +12,6 @@ addons:
 cache:
   apt: true
 
-before_install:
-- tlmgr update --self
-- tlmgr install layaureo supertabular titlesec longtable booktabs
-
 script:
 - xelatex Ufuk-Kayserilioglu-Resume.pdf
 
