@@ -9,6 +9,7 @@ addons:
     - texlive-xetex
     - dvipng
     - texlive-latex-recommended
+    - lmodern
 
 cache:
   apt: true
