@@ -14,7 +14,7 @@ cache:
   apt: true
 
 script:
-- xelatex Ufuk-Kayserilioglu-Resume.tex
+- xelatex -halt-on-error Ufuk-Kayserilioglu-Resume.tex
 
 deploy:
   provider: releases
