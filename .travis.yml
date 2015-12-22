@@ -1,16 +1,9 @@
+language: c
 sudo: false
-
-addons:
-  apt:
-    packages:
-    - texlive-fonts-recommended
-    - texlive-latex-extra
-    - texlive-fonts-extra
-    - texlive-xetex
-    - dvipng
-    - texlive-latex-recommended
-    - lmodern
-    - latex-xcolor
+install:
+- curl -L https://github.com/raphink/travis-texlive/releases/download/2015-07-14_05/texlive.tar.xz
+  | tar xJC ~
+- PATH=$HOME/texlive/bin/x86_64-linux:$PATH
 
 cache:
   apt: true
