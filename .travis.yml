@@ -13,10 +13,22 @@ script:
 - xelatex -halt-on-error Ufuk-Kayserilioglu-Resume.tex
 
 deploy:
-  provider: releases
-  api_key:
-    secure: PK8yUSeOBx/PDiFWdSkSqZmtgl2X8omlmH5NxF8K60hYdHKwDR4onb3F2ErIAC28bjWHk/eL/C6P1aeyP3xiBOycvEV38dWd4od1BeAbbXubB4MiKc9kOFxB3E8alCmGNhVB1rPxUZuzPWX4zWlWtZkfFtAk86xNixp2SyAsnVPZ2FBIfgcvyDVrxbU9gcQnN2NahUxBRqF10EUVWg18B5cn4FxovlIeiTiWmwicvFIzyty+G1rGgcL/zxMOnFpZcZQVNdoqhPZJu4dvEjQcz/NgYtleEVXEBdBWbNnnLtWBq6l4ZlgqfNWr3MpSIGI7PD1QLXEib6pO/3p3A7hQ5lNzzUU+rKCxAJiibLRBCKjYyevAhhUBJZVik44f+eA1WyDB0QgFBAY2QtlYxq/v3m4pro/uOb8yx10vrEvJHTs0e/g7TBvJsWeCFNfcqY20CDKyt4RFUQ82b3z/XIcP7rF1mcmfqFyRz4FtVkqJag5NTiRfhJiZm9EKnpfbTgjttafj7Y6nW1PKQN1aip00ahSJRS7oNm/Irz0h6DayAoAUgEPHfwt1t5T/UzWacHjPs0Cj291PxrP+tL5xeuDopqZw7WRPkWnd5L4uuq7MYq2sIsbLOUREEjMmrGEcOrz6xl/PClwozHUsqoGoM0jpom2ulkiUF1FWluOPKP8XNqg=
-  file: Ufuk-Kayserilioglu-Resume.pdf
-  skip_cleanup: true
-  on:
-    tags: true
+  - provider: releases
+    api_key:
+      secure: PK8yUSeOBx/PDiFWdSkSqZmtgl2X8omlmH5NxF8K60hYdHKwDR4onb3F2ErIAC28bjWHk/eL/C6P1aeyP3xiBOycvEV38dWd4od1BeAbbXubB4MiKc9kOFxB3E8alCmGNhVB1rPxUZuzPWX4zWlWtZkfFtAk86xNixp2SyAsnVPZ2FBIfgcvyDVrxbU9gcQnN2NahUxBRqF10EUVWg18B5cn4FxovlIeiTiWmwicvFIzyty+G1rGgcL/zxMOnFpZcZQVNdoqhPZJu4dvEjQcz/NgYtleEVXEBdBWbNnnLtWBq6l4ZlgqfNWr3MpSIGI7PD1QLXEib6pO/3p3A7hQ5lNzzUU+rKCxAJiibLRBCKjYyevAhhUBJZVik44f+eA1WyDB0QgFBAY2QtlYxq/v3m4pro/uOb8yx10vrEvJHTs0e/g7TBvJsWeCFNfcqY20CDKyt4RFUQ82b3z/XIcP7rF1mcmfqFyRz4FtVkqJag5NTiRfhJiZm9EKnpfbTgjttafj7Y6nW1PKQN1aip00ahSJRS7oNm/Irz0h6DayAoAUgEPHfwt1t5T/UzWacHjPs0Cj291PxrP+tL5xeuDopqZw7WRPkWnd5L4uuq7MYq2sIsbLOUREEjMmrGEcOrz6xl/PClwozHUsqoGoM0jpom2ulkiUF1FWluOPKP8XNqg=
+    file: Ufuk-Kayserilioglu-Resume.pdf
+    skip_cleanup: true
+    on:
+      repo: paracycle/Resume
+      tags: true
+  - provider: s3
+    access_key_id: AKIAJWBMRWXJILDDX23Q
+    secret_access_key:
+      secure: "Y92gDRlerSRnm8XBoWRdVdTzRKSp4lYhZTPMEFv/ohMDvi6fVCWX64h+DzPsMKBELU9sYVWcE7hktIzLZQJhImWz8J6s1SMzAt8NDBuDlpppsYa92BqCZAwK2IjuRzZvjuJ7XdBBUHRCmaBJkssExXj9PTH1sy6jeigLZr1XNtCNebTWwyAq55k9EFtHEoHgwD+87N9Jcvln80KzHuzZSKwCsbakiyvySlqkR6yrblBm5SJuQjbVjTe6LEgaBlBuDbTr3Cp3+SAUR4xPS5+APMc801nm2A/0WL7BxYGRW9vsMEQ+GRE0xqtvcpv6gafE9BOiLHDGiiSVKP4LYz2iYlSwOm0NgmFNVauWqpbzcqML4OAMXvqUzWkBhfgbWMc93aHjugfkZzJuQNXU/XsjxkaFSwoBlLF2DxxTDYsg0DgWX//sJtBElLN4Q22seBoJVryy5dCGwLnmcjQqkzgL8jtaGMT12IKqcbuq0/QWKQY2/Lh2EOnTrWGC46Wot/xd4PxX+loThM1Vv0OuXQ3TMvEcKihatwUCwHxghtyE2VmN5R+9huOwWJsaGiyVnYD/eUdHlilg1fKTNxVWMfO7sozoM+FZpDmAihjPJ3xAEtGjqWTMltT5c0KcfOONA5tKNHoeTTxFUK4i49oXabeQspUUByUumsabJeIrd96slWQ="
+    bucket: "ufuk-kayserilioglu-resume"
+    acl: public_read
+    upload_dir: $TRAVIS_BRANCH
+    skip_cleanup: true
+    on:
+      repo: paracycle/Resume
+      all_branches: true
