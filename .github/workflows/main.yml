@@ -27,4 +27,5 @@ jobs:
         uses: usualdesigner/s3-artifact-upload@main
         with:
           bucket-name: "ufuk-kayserilioglu-resume"
+          prefix: ${{ github.ref_name }}
           file: Ufuk-Kayserilioglu-Resume.pdf
