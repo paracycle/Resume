@@ -1,0 +1,1 @@
+docker run --rm --volume="$PWD:/data" --workdir="/data" -it ghcr.io/xu-cheng/texlive-full:latest xelatex -halt-on-error Ufuk-Kayserilioglu-Resume.tex
