@@ -164,11 +164,13 @@ required.
 ## Build / verify
 
 Use the `typst` CLI (not the Python binding) to compile. `bin/setup`
-installs it if missing — Homebrew on macOS; on Linux it downloads the
-prebuilt release binary from GitHub into `/usr/local/bin`, since `typst`
-is **not** in the official Debian/Ubuntu apt repositories yet
-(tracking issue: https://github.com/typst/typst/issues/3679). `bin/build`
-runs the actual compile:
+installs it if missing — Homebrew on macOS; on Linux it uses `gh release
+download` (GitHub CLI) to fetch the prebuilt release binary and installs
+it into `/usr/local/bin`, since `typst` is **not** in the official
+Debian/Ubuntu apt repositories yet (tracking issue:
+https://github.com/typst/typst/issues/3679). GitHub Actions runners have
+`gh` preinstalled and authenticated automatically, so this needs no extra
+setup in CI. `bin/build` runs the actual compile:
 
 ```bash
 bin/setup   # one-time: installs typst if not already present

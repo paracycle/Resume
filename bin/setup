@@ -34,16 +34,20 @@ case "$arch" in
     ;;
 esac
 
-version="$(curl -fsSL https://api.github.com/repos/typst/typst/releases/latest | grep -m1 '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')"
+if ! command -v gh >/dev/null 2>&1; then
+  echo "error: gh (GitHub CLI) is required to install typst on Linux." >&2
+  echo "Install it: https://cli.github.com" >&2
+  exit 1
+fi
+
 archive="typst-${target}.tar.xz"
-url="https://github.com/typst/typst/releases/download/${version}/${archive}"
 install_dir="/usr/local/bin"
 
-echo "Installing typst ${version} (${target}) to ${install_dir}..."
+echo "Installing typst (${target}) to ${install_dir}..."
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 
-curl -fsSL "$url" -o "$tmpdir/$archive"
+gh release download -R typst/typst --pattern "$archive" --dir "$tmpdir"
 tar -xJf "$tmpdir/$archive" -C "$tmpdir"
 sudo install -m 755 "$tmpdir/typst-${target}/typst" "$install_dir/typst"
 
