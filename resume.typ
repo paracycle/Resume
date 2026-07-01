@@ -114,7 +114,7 @@
 // PERSONAL DATA
 // ------------------------------------------------------------------
 #{
-  let p = data.personal_data
+  let p = data.personal
   section("Personal Data", label-grid((
     (label: "Place and Date of Birth:", value: p.birthplace + " -- " + p.birthdate),
     (label: "Address:", value: p.address),

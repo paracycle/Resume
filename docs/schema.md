@@ -26,7 +26,7 @@ rendered output, it's purely for editability.
 |---|---|---|
 | `first_name` | string | |
 | `last_name` | string | Wrapped in `#smallcaps[]` by the template |
-| `personal_data` | dict | See below |
+| `personal` | dict | See below |
 | `work` | list | One item per employer; summary + detailed entries |
 | `education` | list | |
 | `publications` | list | |
@@ -34,12 +34,12 @@ rendered output, it's purely for editability.
 | `languages` | list | |
 | `interests` | list of strings | Rendered as separate lines |
 
-## `personal_data`
+## `personal`
 
 A single dict with semantic keys (not a list of label/value pairs):
 
 ```yaml
-personal_data:
+personal:
   birthplace: "Istanbul, Turkey"
   birthdate: "27 July 1975"
   address: "Chrysanthou Mylona 8, Flat 301, 1085, Nicosia, CYPRUS"

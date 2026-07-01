@@ -226,7 +226,7 @@ bin/validate   # checks data.yml against docs/schema.json
 ```
 
 This is what turns a typo like `date` vs `label` into a clear
-`fail: personal_data: birthplace is required` / `Additional property ...
+`fail: personal: birthplace is required` / `Additional property ...
 is not allowed` message instead of a raw Typst `dictionary does not
 contain key "..."` error at compile time. `bin/build` runs `bin/validate`
 itself as its first step — invalid data stops the build before `typst

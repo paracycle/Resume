@@ -6,7 +6,7 @@
   "required": [
     "first_name",
     "last_name",
-    "personal_data",
+    "personal",
     "work",
     "education",
     "publications",
@@ -26,7 +26,7 @@
   "properties": {
     "first_name": { "type": "string" },
     "last_name": { "type": "string" },
-    "personal_data": {
+    "personal": {
       "type": "object",
       "required": [
         "birthplace",

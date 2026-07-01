@@ -18,7 +18,7 @@
 first_name: "Ufuk"
 last_name: "Kayserilioglu"
 
-personal_data:
+personal:
   birthplace: "Istanbul, Turkey"
   birthdate: "27 July 1975"
   address: "Chrysanthou Mylona 8, Flat 301, 1085, Nicosia, CYPRUS"
