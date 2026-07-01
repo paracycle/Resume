@@ -1,54 +1,105 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if command -v typst >/dev/null 2>&1; then
-  echo "typst is already installed: $(typst --version)"
-  exit 0
-fi
+install_dir="/usr/local/bin"
 
-# typst isn't packaged in the official Debian/Ubuntu apt repositories yet
-# (https://github.com/typst/typst/issues/3679), so on Linux we install the
-# prebuilt release binary instead of going through a package manager.
-if command -v brew >/dev/null 2>&1; then
-  echo "Installing typst via Homebrew..."
-  brew install typst
-  exit 0
-fi
+install_typst() {
+  if command -v typst >/dev/null 2>&1; then
+    echo "typst is already installed: $(typst --version)"
+    return
+  fi
 
-os="$(uname -s)"
-arch="$(uname -m)"
+  # typst isn't packaged in the official Debian/Ubuntu apt repositories yet
+  # (https://github.com/typst/typst/issues/3679), so on Linux we install
+  # the prebuilt release binary instead of going through a package manager.
+  if command -v brew >/dev/null 2>&1; then
+    echo "Installing typst via Homebrew..."
+    brew install typst
+    return
+  fi
 
-if [ "$os" != "Linux" ]; then
-  echo "error: no supported install method for '$os' (looked for Homebrew)." >&2
-  echo "Install typst manually: https://github.com/typst/typst#installation" >&2
-  exit 1
-fi
-
-case "$arch" in
-  x86_64) target="x86_64-unknown-linux-musl" ;;
-  aarch64|arm64) target="aarch64-unknown-linux-musl" ;;
-  *)
-    echo "error: unsupported architecture '$arch' for prebuilt typst binaries." >&2
+  if [ "$(uname -s)" != "Linux" ]; then
+    echo "error: no supported install method for '$(uname -s)' (looked for Homebrew)." >&2
     echo "Install typst manually: https://github.com/typst/typst#installation" >&2
     exit 1
-    ;;
-esac
+  fi
+
+  local target
+  case "$(uname -m)" in
+    x86_64) target="x86_64-unknown-linux-musl" ;;
+    aarch64|arm64) target="aarch64-unknown-linux-musl" ;;
+    *)
+      echo "error: unsupported architecture '$(uname -m)' for prebuilt typst binaries." >&2
+      echo "Install typst manually: https://github.com/typst/typst#installation" >&2
+      exit 1
+      ;;
+  esac
+
+  local archive="typst-${target}.tar.xz"
+  echo "Installing typst (${target}) to ${install_dir}..."
+  local tmpdir
+  tmpdir="$(mktemp -d)"
+  trap 'rm -rf "$tmpdir"' RETURN
+
+  gh release download -R typst/typst --pattern "$archive" --dir "$tmpdir"
+  tar -xJf "$tmpdir/$archive" -C "$tmpdir"
+  sudo install -m 755 "$tmpdir/typst-${target}/typst" "$install_dir/typst"
+
+  echo "Installed: $(typst --version)"
+}
+
+install_yajsv() {
+  if command -v yajsv >/dev/null 2>&1; then
+    echo "yajsv is already installed: $(yajsv -v 2>&1 || true)"
+    return
+  fi
+
+  # yajsv (used by bin/validate) ships only as prebuilt Go binaries, no
+  # package manager distribution — same gh-release-download approach as
+  # typst above, just no archive to extract.
+  local os_name
+  case "$(uname -s)" in
+    Darwin) os_name="darwin" ;;
+    Linux) os_name="linux" ;;
+    *)
+      echo "error: no supported install method for '$(uname -s)' for yajsv." >&2
+      echo "Install it manually: https://github.com/neilpa/yajsv" >&2
+      exit 1
+      ;;
+  esac
+
+  local arch_name
+  case "$(uname -m)" in
+    x86_64|amd64) arch_name="amd64" ;;
+    arm64|aarch64) arch_name="arm64" ;;
+    i386|i686) arch_name="386" ;;
+    *)
+      echo "error: unsupported architecture '$(uname -m)' for prebuilt yajsv binaries." >&2
+      echo "Install it manually: https://github.com/neilpa/yajsv" >&2
+      exit 1
+      ;;
+  esac
+
+  # yajsv doesn't publish darwin/arm64 binaries before v1.4.1; if this ever
+  # 404s for a given platform combination, check the release assets at
+  # https://github.com/neilpa/yajsv/releases/latest.
+  local asset="yajsv.${os_name}.${arch_name}"
+  echo "Installing yajsv (${asset}) to ${install_dir}..."
+  local tmpdir
+  tmpdir="$(mktemp -d)"
+  trap 'rm -rf "$tmpdir"' RETURN
+
+  gh release download -R neilpa/yajsv --pattern "$asset" --dir "$tmpdir"
+  sudo install -m 755 "$tmpdir/$asset" "$install_dir/yajsv"
+
+  echo "Installed: $(yajsv -v 2>&1 || true)"
+}
 
 if ! command -v gh >/dev/null 2>&1; then
-  echo "error: gh (GitHub CLI) is required to install typst on Linux." >&2
+  echo "error: gh (GitHub CLI) is required by this script." >&2
   echo "Install it: https://cli.github.com" >&2
   exit 1
 fi
 
-archive="typst-${target}.tar.xz"
-install_dir="/usr/local/bin"
-
-echo "Installing typst (${target}) to ${install_dir}..."
-tmpdir="$(mktemp -d)"
-trap 'rm -rf "$tmpdir"' EXIT
-
-gh release download -R typst/typst --pattern "$archive" --dir "$tmpdir"
-tar -xJf "$tmpdir/$archive" -C "$tmpdir"
-sudo install -m 755 "$tmpdir/typst-${target}/typst" "$install_dir/typst"
-
-echo "Installed: $(typst --version)"
+install_typst
+install_yajsv

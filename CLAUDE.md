@@ -30,10 +30,12 @@ resume.typ          Layout/styling template — should rarely need edits
 data.yml            All CV content — edit this for day-to-day updates
 fonts/              Bundled Fontin *.ttf files
 bin/
-  setup                  Installs the typst CLI (Homebrew, or a Linux binary)
+  setup                  Installs typst + yajsv (Homebrew, or Linux binaries)
+  validate               Checks data.yml against docs/schema.json
   build                  Compiles resume.typ -> the PDF
 docs/
   schema.md              Field-by-field reference for data.yml
+  schema.json            Machine-checkable JSON Schema for data.yml
 README.md            Quick start / build instructions
 ```
 
@@ -209,11 +211,27 @@ Then view the PNGs. This was the exact workflow used to catch and fix both
 gotchas above — after any nontrivial layout change, render and look before
 declaring done.
 
+## Schema validation
+
+`docs/schema.json` is a JSON Schema for `data.yml` (kept in sync with the
+human-readable `docs/schema.md` — update both when the shape of `data.yml`
+changes). `bin/validate` checks `data.yml` against it using `yajsv`
+(installed by `bin/setup`, same `gh release download` approach as typst —
+`yajsv` has no package-manager distribution on any platform):
+
+```bash
+bin/validate   # checks data.yml against docs/schema.json
+```
+
+This is what turns a typo like `date` vs `label` into a clear
+`fail: personal_data: birthplace is required` / `Additional property ...
+is not allowed` message instead of a raw Typst `dictionary does not
+contain key "..."` error at compile time. `bin/validate` runs in CI before
+`bin/build` (see `.github/workflows/main.yml`) and can also be run
+manually after editing `data.yml`.
+
 ## Things intentionally *not* done yet (possible next steps)
 
-- No validation/schema-checking of `data.yml` — a typo in a key name
-  (e.g. `date` vs `label`) currently fails at compile time with a Typst
-  dictionary-key error rather than a friendly message.
 - Only English content — no i18n/localization structure, since that was
   never a requirement.
 

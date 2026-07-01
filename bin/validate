@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+if ! command -v yajsv >/dev/null 2>&1; then
+  echo "error: yajsv not found — run bin/setup first." >&2
+  exit 1
+fi
+
+yajsv -s docs/schema.json data.yml

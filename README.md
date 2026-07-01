@@ -15,23 +15,27 @@ reference.
 - `resume.typ` — layout template
 - `data.yml` — all CV content (edit this)
 - `fonts/` — bundled Fontin `.ttf` files
-- `bin/setup` — installs the Typst CLI
+- `bin/setup` — installs the Typst CLI and `yajsv`
+- `bin/validate` — checks `data.yml` against `docs/schema.json`
 - `bin/build` — compiles the resume to a PDF
 - `docs/schema.md` — field reference for `data.yml`
+- `docs/schema.json` — machine-checkable schema for `data.yml`
 
 ## Editing the resume
 
 Open `data.yml` and edit the relevant section. No Typst knowledge
 needed for plain text; see `docs/schema.md` if you want to use bold,
-italics, or links in a field.
+italics, or links in a field. Run `bin/validate` after editing to catch
+typos in key names before compiling.
 
 ## Building
 
 Requires the [Typst CLI](https://github.com/typst/typst).
 
 ```bash
-bin/setup   # one-time: installs typst (Homebrew on macOS, prebuilt binary on Linux)
-bin/build   # compiles resume.typ -> Ufuk-Kayserilioglu-Resume.pdf
+bin/setup      # one-time: installs typst + yajsv
+bin/validate   # checks data.yml against docs/schema.json
+bin/build      # compiles resume.typ -> Ufuk-Kayserilioglu-Resume.pdf
 ```
 
 Equivalently, run the compile directly:

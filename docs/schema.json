@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "data.yml schema",
+  "description": "See docs/schema.md for the human-readable field reference.",
+  "type": "object",
+  "required": [
+    "first_name",
+    "last_name",
+    "personal_data",
+    "work",
+    "education",
+    "publications",
+    "trainings",
+    "languages",
+    "interests"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "workDate": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": { "type": "string" }
+    }
+  },
+  "properties": {
+    "first_name": { "type": "string" },
+    "last_name": { "type": "string" },
+    "personal_data": {
+      "type": "object",
+      "required": [
+        "birthplace",
+        "birthdate",
+        "address",
+        "phone",
+        "email",
+        "github",
+        "twitter",
+        "linkedin"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "birthplace": { "type": "string" },
+        "birthdate": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "github": { "type": "string" },
+        "twitter": { "type": "string" },
+        "linkedin": { "type": "string" }
+      }
+    },
+    "work": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role", "company", "url", "location", "tagline", "entries"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "$ref": "#/definitions/workDate" },
+          "role": { "type": "string" },
+          "company": {
+            "type": "object",
+            "required": ["name", "short_name"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "short_name": { "type": "string" }
+            }
+          },
+          "url": { "type": "string" },
+          "location": { "type": "string" },
+          "tagline": { "type": "string" },
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["paragraphs"],
+              "additionalProperties": false,
+              "properties": {
+                "date": { "$ref": "#/definitions/workDate" },
+                "paragraphs": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "degree", "institution", "location"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string" },
+          "degree": { "type": "string" },
+          "degree2": { "type": "string" },
+          "institution": { "type": "string" },
+          "location": { "type": "string" },
+          "thesis": { "type": "string" },
+          "advisor": { "type": "string" },
+          "gpa": { "type": "string" }
+        }
+      }
+    },
+    "publications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "title", "authors", "venue"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string" },
+          "title": { "type": "string" },
+          "authors": { "type": "string" },
+          "venue": { "type": "string" }
+        }
+      }
+    },
+    "trainings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string" },
+          "value": { "type": "string" }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "proficiency"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "proficiency": { "type": "string" }
+        }
+      }
+    },
+    "interests": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

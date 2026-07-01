@@ -1,5 +1,9 @@
 # `data.yml` schema reference
 
+This is the human-readable reference; `schema.json` in this directory is
+the machine-checkable JSON Schema, enforced by `bin/validate`. Keep both
+in sync when the shape of `data.yml` changes.
+
 All fields are plain text — no Typst markup needed or expected. All
 smallcaps/bold/italic/link formatting is applied by `resume.typ`, not by the
 data file.
