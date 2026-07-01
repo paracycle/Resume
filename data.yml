@@ -1,0 +1,487 @@
+# -----------------------------------------------------------------------
+# Resume data. Edit this file to update the CV — no need to touch the
+# Typst template (resume.typ) at all for ordinary content changes.
+#
+# Fields are plain text/data with no Typst markup, EXCEPT the paragraphs
+# inside work[].entries, which may use inline markup such as
+# #link("https://example.com")[label] for links mentioned in prose.
+#
+# Long text fields use YAML folded block scalars (">-") wrapped at ~80
+# columns for easy editing; the folding turns line breaks back into single
+# spaces when parsed, so wrapping doesn't affect the rendered output.
+#
+# Dates in work[] are a list: [start, end] renders "<start> - <end>",
+# [start] renders just "<start>" (a single point in time), and a missing
+# `date` key renders no date at all.
+# -----------------------------------------------------------------------
+
+first_name: "Ufuk"
+last_name: "Kayserilioglu"
+
+personal_data:
+  birthplace: "Istanbul, Turkey"
+  birthdate: "27 July 1975"
+  address: "Chrysanthou Mylona 8, Flat 301, 1085, Nicosia, CYPRUS"
+  phone: "+357 95969398"
+  email: "ufuk@paralaus.com"
+  github: "paracycle"
+  twitter: "paracycle"
+  linkedin: "ufukkayserilioglu"
+
+# Work history. Each item is one employer, with a top-level summary shown
+# in "Work Experience" plus one or more dated `entries` (with paragraphs)
+# shown in "Work Details". `company.short_name` is used in the summary;
+# `company.name` (fuller/more formal) is used as the Work Details header.
+work:
+  - date: ["Dec 2018", "Present"]
+    role: "Engineering Manager"
+    company:
+      name: "Shopify"
+      short_name: "Shopify"
+    url: "https://shopify.com"
+    location: "Ottawa, Canada"
+    tagline: "Commerce Platform"
+    entries:
+      - date: ["Aug 2020", "Present"]
+        paragraphs:
+          - >-
+            Got promoted to Engineering Manager of the Ruby Infrastructure
+            team inside the Ruby and Rails Infrastructure team.
+          - >-
+            Ruby Infrastructure team at Shopify is responsible for making
+            sure that the Ruby implementation that Shopify runs on (CRuby)
+            is and continues to be fast and scalable with a thriving
+            community around it.
+      - date: ["Dec 2018", "Aug 2020"]
+        paragraphs:
+          - >-
+            Joined the Ruby and Rails Infrastructure team as a Senior
+            Software Developer
+          - >-
+            Worked on the Sorbet adoption project, which involved building
+            tooling and infrastructure for adopting the Sorbet type checker
+            into the Shopify Core monolith codebase.
+
+  - date: ["Oct 2016", "Dec 2018"]
+    role: "Part-time Product Manager and Scrum Master"
+    company:
+      name: "Put.io"
+      short_name: "Put.io"
+    url: "https://put.io"
+    location: "Istanbul"
+    tagline: "Cloud Storage Service"
+    entries:
+      - paragraphs:
+          - >-
+            Joined the team as a part-time support engineer, resolving
+            customer support issues in collaboration with the development
+            team.
+          - >-
+            As the support team grew, moved on to a Product Manager and
+            Scrum Master role, overseeing both the planning and the
+            delivery of product features. Implemented agile workflows with
+            buy-in from the development team, reducing production failures
+            without slowing down feature delivery.
+
+  - date: ["Sep 2014", "Nov 2018"]
+    role: "Full Stack Software Developer"
+    company:
+      name: "Myplanet Internet Solutions"
+      short_name: "Myplanet"
+    url: "https://www.myplanet.com"
+    location: "Toronto, Canada"
+    tagline: "Full-time Independent Contractor"
+    entries:
+      - date: ["Sep 2014", "Jul 2016"]
+        paragraphs:
+          - >-
+            Joined the #link("http://relayrobin.com")[RelayRobin] product
+            team as a full-stack software developer working as an
+            Independent Contractor remotely from Istanbul, Turkey. During
+            the time I've worked on the product, I built the automated
+            integration testing platform based on Cucumber, Capybara and
+            Firefox Webdriver, built the menu-driven command line interface
+            for the system setup script, was the main architect for the
+            hyperlink REST API (using HAL) and its integration into the
+            rest of the stack and was the architect of the Debian APT based
+            fully offline upgrade package compiler to enable customers to
+            upgrade installed RelayRobin packages and their dependencies
+            without being connected to the internet.
+          - >-
+            During that time, I was also working as a support engineer on
+            the team where my responsibilities were talking to customers,
+            responding to support tickets and providing hands-on support
+            via screensharing sessions.
+      - date: ["Jul 2016", "Feb 2017"]
+        paragraphs:
+          - >-
+            Tasked as the lead developer in charge of building a customer
+            portal for a managed video collaboration solutions client. The
+            project involved a rebuild of the scheduling and reports
+            sections of the existing customer portal but keeping other
+            sections, which were developed using GWT running on JBoss,
+            intact. The deliverable was a bespoke frontend, built using
+            AngularJS, talking to the client backend API endpoints and a
+            thin NodeJS based middleware for report generation and caching.
+            The system was able to display reports that included tabular
+            data and charts on the web as well as being able to render
+            them as downloadable CSV, PDF and XLSX files.
+      - date: ["Feb 2017", "Nov 2018"]
+        paragraphs:
+          - >-
+            Moved back to the product team as lead developer of
+            #link("http://askq.io/")[Q Digital Marketing Assistant].
+          - >-
+            I've been leading a learning-oriented development methodology
+            on the product team employing quick spikes and small MVPs on a
+            NodeJS - Typescript based project to test feature adoption and
+            technology validation as the company is validating the product
+            in the market.
+
+  - date: ["Aug 2011", "Sep 2014"]
+    role: "Managing Partner and CTO"
+    company:
+      name: "Enkuba"
+      short_name: "Enkuba"
+    url: "http://www.enkuba.com"
+    location: "Istanbul"
+    tagline: "Startup Accelerator / Incubator"
+    entries:
+      - date: ["Aug 2011", "Mar 2013"]
+        paragraphs:
+          - >-
+            Cofounded the company and assumed role as Managing Partner. In
+            that role, my responsibilities were to get in touch with the
+            local startup ecosystem, recruit promising startups into the
+            accelerator programme, screen potential programme applications,
+            make feasibility studies on candidate startups and make
+            investment decisions. In addition to these management roles, I
+            was also mentoring founders in the programme on topics ranging
+            from lean startup methodologies to agile development and
+            helping them with their investor pitches.
+          - >-
+            As CTO of the incubator, I helped founders in the programme
+            tackle programming challenges with hands-on coding sessions.
+            For one startup
+            (#link("http://www.bukacparaeder.com")[BuKacParaEder]) with no
+            technical co-founder, I built the initial website from the
+            ground up using Ruby on Rails. That particular website, an
+            online antiques valuation site, was a fully operational
+            internet services project complete with payment systems
+            integration (PayPal and Virtual POS), mini CMS, PDF report
+            generation and backend administrative management interface
+            built in two languages (Turkish and English).
+      - date: ["Mar 2013", "Sep 2014"]
+        paragraphs:
+          - >-
+            After 6 startup investments, partners decided to pivot the
+            business to incubating own projects in house. The first (and
+            current) project was to build an online insurance broker,
+            #link("https://sigortaci123.com")[Sigortaci123]. The
+            observation was that competition in the local market were
+            offering complex and confusing solutions and, most of the
+            time, they were steering customers towards finalizing
+            transactions via the call-center. Our goal was to discover as
+            much information about the customer as possible by utilizing
+            technology and to provide an easy-to-use user interface that
+            would gently steer them towards an online purchase.
+          - >-
+            As CTO, I was responsible for getting in touch with the
+            underwriting insurance companies to negotiate access to their
+            web APIs, building a Ruby gem abstracting the APIs of
+            different companies into a single unified interface and
+            constructing a Ruby on Rails, Bootstrap, Angular website --
+            both backend and frontend. It was decided that the project
+            will have a different exact-match domain name for each
+            insurance type, so the Motor Own Damage insurance is being
+            hosted at #link("https://kasko123.com")[one domain] and the
+            Third Party Compulsory Liability motor insurance is being
+            hosted #link("https://trafik123.com")[at another], all being
+            operated by the same Rails application under the hood.
+          - >-
+            The project has been open to public since the beginning of
+            December 2013 and currently has 10 insurance company
+            integrations. Since launch, the team has been running A/B
+            tests, analyzing analytics reports, optimising the UI flow,
+            implementing features to increase conversion, talking to
+            customers online to better understand their needs and building
+            integrations with more insurance companies. More recently
+            #link("https://dask123.com")[DASK] (compulsory earthquake
+            liability insurance) has been added as a product and
+            #link("https://seyahat123.com")[Seyahat] (travel insurance) is
+            being worked on.
+
+  - date: ["Jan 2002", "Aug 2011"]
+    role: "Senior Software Engineer"
+    company:
+      name: "PhonoClick"
+      short_name: "PhonoClick"
+    url: "http://www.phonoclick.com"
+    location: "Istanbul"
+    tagline: "Customer Interaction Software"
+    entries:
+      - date: ["2002"]
+        paragraphs:
+          - "Joined the company as a member of the founding team."
+      - date: ["2002", "2011"]
+        paragraphs:
+          - >-
+            Initiated, and later on led, the development of PhonoClick
+            Telephony Server; a C/C++ based, VoiceXML 2.0 compliant voice
+            interaction system that works over POTS, ISDN and VoIP lines
+            and is capable of utilizing ASR and TTS resources in various
+            languages. As the lead developer of the product, I was
+            responsible for the architecture, design and implementation of
+            all aspects of the system. Constantly communicated with the
+            sales team about business requests and worked towards adding
+            new requirements and features to the product, with a fast
+            turn-around, to fulfill customer demand and in order to
+            position it better in the market. The system was licensed to
+            and installed at various customer locations such as Metis,
+            Akbank, Finansbank, Garanti, Azercell. The project was funded
+            by TUBITAK as part of the TEYDEB programme.
+      - date: ["2004", "2005"]
+        paragraphs:
+          - >-
+            Designed and implemented the PhonoClick Conference Server
+            (based on PhonoClick Telephony Server) and the first iteration
+            of the teleconferencing application that was operated both as
+            a hosted solution by the company and as an SaaS solution in
+            collaboration with Turkcell. Implemented various novel
+            extensions to the VoiceXML interpreter in order to implement
+            the conferencing system, without breaking standards
+            compliance.
+      - date: ["2005"]
+        paragraphs:
+          - >-
+            Designed and implemented the PhonoClick IP Call Center (based
+            on PhonoClick Telephony Server) and worked on the first
+            iteration of the ACD application package. The package provided
+            customers with a web based console to define, administer and
+            monitor operators, queues and calls; and, working in
+            conjunction with PhonoClick IP Softphone, for the operators to
+            answer (or, in some cases, initiate) calls. The system was
+            installed at the Kamu Sertifikasyon Merkezi operated by
+            TUBITAK in order to provide a suitable solution for their call
+            center operation.
+      - date: ["2005", "2006"]
+        paragraphs:
+          - >-
+            Led the Hizli Basvuru Servisi (Fast Application Service)
+            project that was primarily developed in collaboration with
+            Akbank to streamline their credit application process and was
+            later deployed to other leading banks in Turkey such as
+            Finansbank. The project involved processing credit or credit
+            card applications through an easy-to-use phone line service by
+            providing first-in-class features such as integrating with SOA
+            services to lookup and utilize personal information just by
+            providing a Citizen ID Number and accepting natural speech
+            inputs for other pieces of complex information.
+          - >-
+            The system was integrated separately with the core banking
+            systems of each bank to query and report application status
+            and to provide feedback to the customer over various channels
+            such as outbound phone calls and text messages. As project
+            lead, I was responsible for outlining an architecture of the
+            various components of the system, worked with colleagues in
+            the implementation and was point man in technical
+            communications between the company and the respective bank.
+      - date: ["2006", "2008"]
+        paragraphs:
+          - >-
+            Designed and implemented the initial version of the PhonoClick
+            Automated Outbound Calling platform. The platform worked as a
+            cloud SaaS solution that was responsible for receiving customer
+            data (including cell phone numbers and various customer data
+            relevant to the call) through online channels, such as
+            FTP/SFTP/SCP file upload or file drops, SOAP based online API;
+            placing outbound calls to those customers; collecting customer
+            input; and providing detailed reports of call results and
+            customer responses to the initiating party. The principle
+            challenges of the platform were providing high availability,
+            efficient load distribution and fast response times which were
+            all satisfied. The project was funded by TUBITAK as part of
+            the TEYDEB programme.
+      - date: ["Aug 2006", "Sep 2007"]
+        paragraphs:
+          - "Year off from the company to complete mandatory military service."
+      - date: ["2008", "2010"]
+        paragraphs:
+          - >-
+            Led and implemented various mobile web projects and mobile
+            applications catering to businesses and consumers. Worked with
+            various technologies such as LBS, HTML5, consumption and
+            production of REST based APIs and One Time Password protocols.
+            Implemented mobile applications for all major platforms
+            including J2ME, Windows Mobile, BlackBerry OS, iOS and
+            Android. Drafted and implemented a secure login process to be
+            used in mobile applications targeted towards security-sensitive
+            operations such as banking that provided mutual identification
+            for both the client and the server, prevention and detection
+            of man-in-the-middle attacks, protection of identity through
+            multiple security layers both on the client and the server
+            side.
+      - date: ["2010", "2011"]
+        paragraphs:
+          - >-
+            Worked as a senior developer on the
+            #link("http://www.bodru.com")[Bodru] project which aims to
+            provide a business memory platform to SMEs as a cloud
+            solution. Architected, designed and implemented pieces in the
+            infrastructure of the platform such as designing and setting
+            up a scalable cloud service utilization that will enable the
+            service to easily scale according to demand; evaluating,
+            integrating and writing code to utilize various third-party
+            technologies such as search engines, database abstractions,
+            caching platforms. Evaluated, designed, implemented and
+            refined a continuous integration process for the product with
+            a build server, automated build and test scripts, a
+            comprehensive test suite, semi or fully automated deployment
+            scripts and a database migration methodology and tools.
+          - "Currently a partner in the company in a non-executive capacity."
+
+  - date: ["Aug 2001", "Jan 2002"]
+    role: "Software Engineer"
+    company:
+      name: "Parkyeri"
+      short_name: "Parkyeri"
+    url: "http://www.parkyeri.com"
+    location: "Istanbul"
+    tagline: "Software Development, Operations and Consultancy"
+    entries:
+      - paragraphs:
+          - >-
+            Built the first version the extensible content management
+            system platform of the company using PHP and MySQL. The CMS
+            was a completely customizable solution with a WYSIWYG admin
+            interface for manipulating content and hierarchy. The system
+            was used to provide an easy to administer web site for a local
+            company and was deployed to production successfully.
+
+  - date: ["Dec 2000", "Apr 2001"]
+    role: "Consultant Software Engineer"
+    company:
+      name: "Turk.Net"
+      short_name: "Turk.Net"
+    url: "http://turk.net/"
+    location: "Istanbul"
+    tagline: "Internet Service Provider"
+    entries:
+      - paragraphs:
+          - >-
+            Provided consultancy as a software engineer in the Telebilet
+            project which aimed to be the first service to provide tickets
+            to movies via a website. The project involved working and
+            integrating with the proprietary ticketing solutions employed
+            by movie theaters, implementing a server backend to keep track
+            to movie times, seat availability, seat reservation and
+            allocation task, building a kiosk front-end to purchase and/or
+            print tickets; and developing a web site to display current
+            films, showings, movie theaters with ticket purchase workflow
+            that allowed customers to pick their choice of seats among the
+            various options offered to them.
+
+  - date: ["Sep 1997", "Jun 2004"]
+    role: "Teaching Assistant"
+    company:
+      name: "Physics Department, Bogazici University"
+      short_name: "Bogazici University"
+    url: "http://www.boun.edu.tr/"
+    location: "Istanbul"
+    tagline: "Physics Department"
+    entries:
+      - paragraphs:
+          - >-
+            Responsible for organizing problem sessions, providing office
+            hours, instructing lab courses, providing course lectures as
+            stand-ins to instructors; and grading of assignments, quizzes,
+            lab work and exams.
+      - paragraphs:
+          - >-
+            Helped setup and operated the mainframes purchased by the
+            department to provide computational services to faculty.
+      - paragraphs:
+          - >-
+            Setup, maintained and operated the department computer lab of
+            10 computers with responsibilities such as formatting and
+            installing Windows/Linux operating systems at the start of
+            each term, troubleshooting and reporting computer problems.
+      - paragraphs:
+          - >-
+            Organized seminars for assistants to disseminate new results
+            from research in the department, to provide a greater
+            understanding of the various research topics and to generate
+            ideas for possible research areas.
+
+education:
+  - date: "August 2005"
+    degree: "MSc and PhD in Physics"
+    institution: "Bogazici University"
+    location: "Istanbul"
+    thesis: >-
+      Quantum Group Structures Associated with Invariances of Some
+      Physical Algebras
+    advisor: "Metin Arik"
+  - date: "July 1998"
+    degree: "Bachelor of Science, Physics"
+    degree2: "Bachelor of Science, Mathematics (double major)"
+    institution: "Bogazici University"
+    location: "Istanbul"
+    gpa: "3.63/4.0"
+
+publications:
+  - date: "2005"
+    title: >-
+      Quantum group structures associated with invariances of some
+      physical algebras
+    authors: "U. Kayserilioglu -- PhD Thesis"
+    venue: "Bogazici University Press"
+  - date: "2003"
+    title: "Quantum invariance group of bosons and fermions"
+    authors: "M. Arik, U. Kayserilioglu"
+    venue: "hep-th/0304185"
+  - date: "2002"
+    title: >-
+      The Anticommutator Spin Algebra, its Representations and Quantum
+      Group Invariance
+    authors: "M. Arik, U. Kayserilioglu"
+    venue: "Int.Jour.Mod.Phys.A"
+  - date: "2001"
+    title: >-
+      Proceedings of the Second Gürsey Memorial Conference, Bogaziçi Univ,
+      19-23 June 2000
+    authors: "Co-editor of the volume"
+    venue: "Classical and Quantum Gravity"
+  - date: "2000"
+    title: >-
+      Quark and lepton masses from fundamental algebra with exact color
+      symmetry
+    authors: "E. Arik, M. Arik, U. Kayserilioglu, M. B. Unlu"
+    venue: "Turkish Journal of Physics"
+  - date: "1999"
+    title: "Fermionic random sets and q-oscillators"
+    authors: "U. Kayserilioglu, J. Kornfilt, G. Unel and M. B. Unlu"
+    venue: "Phys.Lett.A"
+  - date: "1998"
+    title: "Quantum Group description of decaying particles"
+    authors: "M. Arik, U. Kayserilioglu, G. Unel"
+    venue: "J.Phys.A: Math.Gen."
+
+trainings:
+  - date: "Sep 2006"
+    value: "Microsoft Certified Professional"
+  - date: "Jun 2010"
+    value: "SCRUM training"
+  - date: "Jun 2009"
+    value: "W3C Mobile Web Best Practices Course"
+
+languages:
+  - name: "Turkish"
+    proficiency: "Mothertongue"
+  - name: "English"
+    proficiency: "Near-native"
+
+interests:
+  - "Technology, Open-Source, Programming"
+  - "Physics, Mathematics"
+  - "Frisbee, Bicycles, Travelling"

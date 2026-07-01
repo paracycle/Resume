@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v typst >/dev/null 2>&1; then
+  echo "typst is already installed: $(typst --version)"
+  exit 0
+fi
+
+# typst isn't packaged in the official Debian/Ubuntu apt repositories yet
+# (https://github.com/typst/typst/issues/3679), so on Linux we install the
+# prebuilt release binary instead of going through a package manager.
+if command -v brew >/dev/null 2>&1; then
+  echo "Installing typst via Homebrew..."
+  brew install typst
+  exit 0
+fi
+
+os="$(uname -s)"
+arch="$(uname -m)"
+
+if [ "$os" != "Linux" ]; then
+  echo "error: no supported install method for '$os' (looked for Homebrew)." >&2
+  echo "Install typst manually: https://github.com/typst/typst#installation" >&2
+  exit 1
+fi
+
+case "$arch" in
+  x86_64) target="x86_64-unknown-linux-musl" ;;
+  aarch64|arm64) target="aarch64-unknown-linux-musl" ;;
+  *)
+    echo "error: unsupported architecture '$arch' for prebuilt typst binaries." >&2
+    echo "Install typst manually: https://github.com/typst/typst#installation" >&2
+    exit 1
+    ;;
+esac
+
+version="$(curl -fsSL https://api.github.com/repos/typst/typst/releases/latest | grep -m1 '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')"
+archive="typst-${target}.tar.xz"
+url="https://github.com/typst/typst/releases/download/${version}/${archive}"
+install_dir="/usr/local/bin"
+
+echo "Installing typst ${version} (${target}) to ${install_dir}..."
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+
+curl -fsSL "$url" -o "$tmpdir/$archive"
+tar -xJf "$tmpdir/$archive" -C "$tmpdir"
+sudo install -m 755 "$tmpdir/typst-${target}/typst" "$install_dir/typst"
+
+echo "Installed: $(typst --version)"
