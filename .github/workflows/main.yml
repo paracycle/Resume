@@ -11,8 +11,6 @@ jobs:
         run: bin/setup
         env:
           GH_TOKEN: ${{ github.token }}
-      - name: Validate data.yml
-        run: bin/validate
       - name: Compile resume
         run: bin/build
       - name: Upload PDF artifact

@@ -174,17 +174,19 @@ https://github.com/typst/typst/issues/3679). GitHub Actions runners have
 `gh` preinstalled but **not** authenticated by default — the workflow
 must set `GH_TOKEN: ${{ github.token }}` in the `bin/setup` step's `env:`,
 or `gh` fails with "To use GitHub CLI in a GitHub Actions workflow, set
-the GH_TOKEN environment variable" (exit code 4). `bin/build` runs the
-actual compile:
+the GH_TOKEN environment variable" (exit code 4). `bin/build` validates
+`data.yml` (via `bin/validate`, see "Schema validation" below) and then
+compiles:
 
 ```bash
-bin/setup   # one-time: installs typst if not already present
-bin/build   # compiles resume.typ -> Ufuk-Kayserilioglu-Resume.pdf
+bin/setup   # one-time: installs typst + yajsv if not already present
+bin/build   # validates data.yml, then compiles resume.typ -> the PDF
 ```
 
-`bin/build` is equivalent to, and can be replaced by, running directly
-from the repo root (`resume.typ`, `data.yml`, and `fonts/` are all loaded
-by relative path, so must stay in this layout relative to each other):
+`bin/build`'s compile step is equivalent to, and can be replaced by,
+running directly from the repo root (`resume.typ`, `data.yml`, and
+`fonts/` are all loaded by relative path, so must stay in this layout
+relative to each other) — but note this skips the validation step:
 
 ```bash
 typst compile --font-path fonts resume.typ Ufuk-Kayserilioglu-Resume.pdf
@@ -226,9 +228,11 @@ bin/validate   # checks data.yml against docs/schema.json
 This is what turns a typo like `date` vs `label` into a clear
 `fail: personal_data: birthplace is required` / `Additional property ...
 is not allowed` message instead of a raw Typst `dictionary does not
-contain key "..."` error at compile time. `bin/validate` runs in CI before
-`bin/build` (see `.github/workflows/main.yml`) and can also be run
-manually after editing `data.yml`.
+contain key "..."` error at compile time. `bin/build` runs `bin/validate`
+itself as its first step — invalid data stops the build before `typst
+compile` ever runs, so there's no separate validation step in CI. Run
+`bin/validate` on its own if you just want to check `data.yml` without
+compiling.
 
 ## Things intentionally *not* done yet (possible next steps)
 
