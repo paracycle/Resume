@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Install typst
         run: bin/setup
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: Compile resume
         run: bin/build
       - name: Upload PDF artifact

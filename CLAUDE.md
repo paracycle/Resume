@@ -169,8 +169,11 @@ download` (GitHub CLI) to fetch the prebuilt release binary and installs
 it into `/usr/local/bin`, since `typst` is **not** in the official
 Debian/Ubuntu apt repositories yet (tracking issue:
 https://github.com/typst/typst/issues/3679). GitHub Actions runners have
-`gh` preinstalled and authenticated automatically, so this needs no extra
-setup in CI. `bin/build` runs the actual compile:
+`gh` preinstalled but **not** authenticated by default — the workflow
+must set `GH_TOKEN: ${{ github.token }}` in the `bin/setup` step's `env:`,
+or `gh` fails with "To use GitHub CLI in a GitHub Actions workflow, set
+the GH_TOKEN environment variable" (exit code 4). `bin/build` runs the
+actual compile:
 
 ```bash
 bin/setup   # one-time: installs typst if not already present
